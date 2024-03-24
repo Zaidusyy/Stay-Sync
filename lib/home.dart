@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uu_hostel_management/Constants.dart';
 import 'package:uu_hostel_management/Drawer_Screens/Aboutus.dart';
+import 'package:uu_hostel_management/Laundry.dart';
 import 'package:uu_hostel_management/Notice.dart';
 import 'package:uu_hostel_management/Slider/SliderScreen.dart';
 
@@ -43,7 +44,7 @@ class home extends StatelessWidget {
 
             ],),
             Row(children: [
-              Roundmenu(name: 'LAUNDRY', icon: Icons.local_laundry_service_outlined, navigate: null),
+              Roundmenu(name: 'LAUNDRY', icon: Icons.local_laundry_service_outlined, navigate: Laundry()),
               SizedBox(width: 10,),
               Roundmenu(name: 'MESS', icon: Icons.food_bank_outlined, navigate:null),
             ],),

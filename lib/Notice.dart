@@ -26,7 +26,6 @@ class Notice extends StatelessWidget {
 
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-
                 children: [
                   Text('Holiday Office Closure Notice',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: uuBlue),),
                   Text('12 January 2024'),
@@ -45,7 +44,7 @@ class Notice extends StatelessWidget {
                     style: TextStyle(
                       color: uuBlue,fontSize: 15,
                     ),
-                  )
+                  ),
                 ],
               ),
             );
