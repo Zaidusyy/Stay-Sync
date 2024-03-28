@@ -20,6 +20,7 @@ class Laundry extends StatelessWidget {
               child: Icon(
                 Icons.qr_code,
                 color: uuBlue,
+                size: 30,
               )),
           SizedBox(
             width: 15,

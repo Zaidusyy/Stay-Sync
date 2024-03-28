@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uu_hostel_management/HelpAndComplaint.dart';
 import 'package:uu_hostel_management/home.dart';
 
 import 'Drawer_Screens/Aboutus.dart';
@@ -19,8 +20,10 @@ const List<Color> logingradiant = [
   uuWhite,
   uuLightBlue
 ];
-const List<Color> lightgradiant=[uuLightBlue, uuWhite, uuLightRed];
+const List<Color> lightgradiant = [uuLightBlue, uuWhite, uuLightRed];
 
+final tabbartextstyle =
+    TextStyle(color: uuBlue, fontWeight: FontWeight.bold, fontSize: 20);
 
 class Roundbutton extends StatelessWidget {
   String name;
@@ -60,7 +63,7 @@ class Roundbutton extends StatelessWidget {
 }
 
 class MyInputField extends StatelessWidget {
-  final label, prefix, suffix, controller, keyboardtype, ispassword;
+  final label, prefix, suffix, controller, keyboardtype, ispassword,enabled,value,maxline,maxlength;
   MyInputField(
       {super.key,
       required this.label,
@@ -68,13 +71,16 @@ class MyInputField extends StatelessWidget {
       this.suffix = null,
       this.keyboardtype = TextInputType.text,
       this.controller = null,
-      this.ispassword = false});
+      this.ispassword = false,this.enabled=true,this.value=null,this.maxline=1,this.maxlength=null});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
       child: TextFormField(
+        enabled: enabled,
+        maxLength:maxlength,
+        maxLines: maxline,
         obscureText: ispassword,
         controller: controller,
         keyboardType: keyboardtype,
@@ -83,11 +89,15 @@ class MyInputField extends StatelessWidget {
           fillColor: uuWhite,
           prefixIcon: prefix,
           suffixIcon: suffix,
-          label: Text(
-            label,
+          label: Text((value==null)?
+            label:value,
             style: TextStyle(color: uuBlue),
           ),
           enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: uuBlue),
+          ),
+          disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(color: uuBlue),
           ),
@@ -159,7 +169,7 @@ class Roundmenu extends StatelessWidget {
     return Expanded(
       child: Container(
           height: 90,
-          margin: EdgeInsets.only(top: 10, bottom: 10,left: 5,right: 5),
+          margin: EdgeInsets.only(top: 10, bottom: 10, left: 5, right: 5),
           padding: EdgeInsets.only(top: 10, bottom: 10),
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -171,8 +181,8 @@ class Roundmenu extends StatelessWidget {
           ),
           child: InkWell(
             splashColor: Colors.transparent,
-            onTap: (){
-              if(navigate!=null) {
+            onTap: () {
+              if (navigate != null) {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => navigate));
               }
@@ -189,12 +199,12 @@ class Roundmenu extends StatelessWidget {
                 title: Text(
                   name,
                   style: TextStyle(
-                      color: uuBlue,
-                      fontSize: fontsize,
-                      fontWeight: FontWeight.bold,),
+                    color: uuBlue,
+                    fontSize: fontsize,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.start,
                 ),
-
                 trailing: (image == null)
                     ? Icon(
                         Icons.arrow_forward_ios_outlined,
@@ -297,10 +307,8 @@ class MyDrawer extends StatelessWidget {
             Drawermenue(
               name: 'Help & Support',
               icon: Icons.help_outline,
-            ),
-            Drawermenue(
-              name: 'Feedback',
-              icon: Icons.feedback_outlined,
+              navigate: HelpAndComplaint(),
+              contxt: context,
             ),
             Drawermenue(
               name: 'About Us',
@@ -311,6 +319,28 @@ class MyDrawer extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class MyTextFieldContainer extends StatelessWidget {
+  final VoidCallback ontap;
+  final label, prefix, suffix,value;
+
+  const MyTextFieldContainer(
+      {super.key,
+      required this.ontap,
+      required this.label,
+      this.prefix = null,
+      this.suffix = null,
+        this.value=null
+       });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: MyInputField(label: label,prefix: prefix,suffix: suffix,enabled: false,value: value,),
+      onTap: ontap,
     );
   }
 }

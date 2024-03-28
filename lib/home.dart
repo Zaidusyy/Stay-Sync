@@ -1,11 +1,12 @@
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uu_hostel_management/Constants.dart';
-import 'package:uu_hostel_management/Drawer_Screens/Aboutus.dart';
+import 'package:uu_hostel_management/HelpAndComplaint.dart';
 import 'package:uu_hostel_management/Laundry.dart';
+import 'package:uu_hostel_management/Mess/Mess.dart';
 import 'package:uu_hostel_management/Notice.dart';
+import 'package:uu_hostel_management/Forms/GatePass.dart';
 import 'package:uu_hostel_management/Slider/SliderScreen.dart';
 
 class home extends StatelessWidget {
@@ -18,7 +19,7 @@ class home extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Stay Sync',
-          style: TextStyle(color: uuBlue),
+          style: TextStyle(color: uuBlue,fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
       ),
@@ -46,11 +47,11 @@ class home extends StatelessWidget {
             Row(children: [
               Roundmenu(name: 'LAUNDRY', icon: Icons.local_laundry_service_outlined, navigate: Laundry()),
               SizedBox(width: 10,),
-              Roundmenu(name: 'MESS', icon: Icons.food_bank_outlined, navigate:null),
+              Roundmenu(name: 'MESS', icon: Icons.food_bank_outlined, navigate:Mess()),
             ],),
             Row(children: [
 
-              Roundmenu(name: 'PASS', icon: Icons.exit_to_app_outlined, navigate: null),
+              Roundmenu(name: 'GATE PASS', icon: Icons.exit_to_app_outlined, navigate: GatePass()),
               SizedBox(width: 10,),
               Roundmenu(name: 'BUS', icon: Icons.directions_bus_outlined, navigate: null),
             ],),
@@ -60,7 +61,7 @@ class home extends StatelessWidget {
               SizedBox(width: 10,),
               Roundmenu(name: 'EVENTS', icon: Icons.event_note_outlined, navigate: null),
             ],), Row(children: [
-              Roundmenu(name: '  HELP & COMPLAINT', icon: Icons.feedback_outlined, navigate: null,fontsize: 20,),
+              Roundmenu(name: '  HELP & COMPLAINT', icon: Icons.feedback_outlined, navigate: HelpAndComplaint(),fontsize: 20,),
 
             ],),
 
