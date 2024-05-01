@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:uu_hostel_management/Constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class HelpAndComplaint extends StatefulWidget {
   const HelpAndComplaint({super.key});
@@ -9,9 +14,30 @@ class HelpAndComplaint extends StatefulWidget {
 }
 
 class _HelpAndComplaintState extends State<HelpAndComplaint> {
-  
+
   String selectedtype='Select Type';
-  
+  final Ctext=TextEditingController();
+
+  final _firebaseFirestore=FirebaseFirestore.instance.collection('Complaint');
+  sendcomplaint(){
+    print('step 1');
+    FirebaseAuth auth=FirebaseAuth.instance;
+    final uid=auth.currentUser!.uid.toString();
+
+    if(selectedtype!='Select Type'&& Ctext.text.toString().length>15) {
+      _firebaseFirestore.doc(uid).collection(selectedtype).add({
+        'uid': uid,
+        'Text': Ctext.text.toString()
+
+      }).then((value) {
+        print('sucess');
+
+      }).onError((error, stackTrace) {
+        print(error.toString());
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,11 +137,15 @@ class _HelpAndComplaintState extends State<HelpAndComplaint> {
                         Icons.work_history_outlined,
                         color: uuBlue,
                       ),
+                      controller: Ctext,
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Roundbutton(name: 'Register', onTap: () {}),
+                    Roundbutton(name: 'Register', onTap: () {
+                      print('hello');
+                      sendcomplaint();
+                    }),
                     SizedBox(
                       height: 10,
                     ),

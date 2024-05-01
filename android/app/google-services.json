@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "2361398172",
+    "project_id": "staysync-aa3ce",
+    "storage_bucket": "staysync-aa3ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2361398172:android:c804e04ae551fe72402e59",
+        "android_client_info": {
+          "package_name": "com.example.uu_hostel_management"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL_1pYB_LZfJ1EZlu2tBb-1YyI8H_bZ-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

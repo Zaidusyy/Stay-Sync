@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uu_hostel_management/Constants.dart';
+import 'package:uu_hostel_management/home.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -10,6 +14,40 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  createaccount() {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final firestore = FirebaseFirestore.instance.collection('User');
+
+    auth
+        .createUserWithEmailAndPassword(email: email.text, password: pass1.text)
+        .then((value) {
+      final _uid = auth.currentUser?.uid.toString();
+      firestore.doc(_uid).set({
+        'name': name.text,
+        'studentId': studentId.text,
+        'email': email.text,
+        'paymentId': paymentId.text,
+        'selectedFloor': selectedFloor,
+        'selectedRoomType': selectedRoomType
+      }).then((value) {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>home()));
+        print('success');
+      }).onError((error, stackTrace) {
+        print(
+            error.toString());
+      });
+    }).onError((error, stackTrace) {
+      print(error.toString());
+    });
+  }
+
+  final name = TextEditingController();
+  final studentId = TextEditingController();
+  final email = TextEditingController();
+  final paymentId = TextEditingController();
+  final pass1 = TextEditingController();
+  final pass2 = TextEditingController();
+
   String selectedFloor = 'Preferred Floor';
   String selectedRoomType = 'Room Type';
 
@@ -48,7 +86,8 @@ class _RegisterState extends State<Register> {
                 height: 20,
               ),
               Container(
-                padding: EdgeInsets.only(top: 30, bottom: 30, left: 5, right: 5),
+                padding:
+                    EdgeInsets.only(top: 30, bottom: 30, left: 5, right: 5),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
@@ -61,6 +100,7 @@ class _RegisterState extends State<Register> {
                         Icons.person_outline,
                         color: uuBlue,
                       ),
+                      controller: name,
                     ),
                     MyInputField(
                       label: 'Student ID',
@@ -68,6 +108,8 @@ class _RegisterState extends State<Register> {
                         Icons.person_pin_outlined,
                         color: uuBlue,
                       ),
+                      keyboardtype: TextInputType.text,
+                      controller: studentId,
                     ),
                     MyInputField(
                       keyboardtype: TextInputType.emailAddress,
@@ -76,6 +118,7 @@ class _RegisterState extends State<Register> {
                         Icons.email_outlined,
                         color: uuBlue,
                       ),
+                      controller: email,
                     ),
                     MyInputField(
                       label: 'Payment ID',
@@ -83,11 +126,15 @@ class _RegisterState extends State<Register> {
                         Icons.payment,
                         color: uuBlue,
                       ),
+                      controller: paymentId,
                     ),
                     Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(
-                          top: 20, right: 10, left: 10,),
+                        top: 20,
+                        right: 10,
+                        left: 10,
+                      ),
                       padding: EdgeInsets.only(
                           top: 6, bottom: 6, left: 10, right: 10),
                       decoration: BoxDecoration(
@@ -109,7 +156,8 @@ class _RegisterState extends State<Register> {
                           Icons.business,
                           color: uuBlue,
                         ),
-                        items: <String>['Preferred Floor',
+                        items: <String>[
+                          'Preferred Floor',
                           'Ground Floor',
                           'First Floor',
                           'Second Floor',
@@ -128,7 +176,10 @@ class _RegisterState extends State<Register> {
                     Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(
-                          top: 20, right: 10, left: 10,),
+                        top: 20,
+                        right: 10,
+                        left: 10,
+                      ),
                       padding: EdgeInsets.only(
                           top: 6, bottom: 6, left: 10, right: 10),
                       decoration: BoxDecoration(
@@ -176,11 +227,13 @@ class _RegisterState extends State<Register> {
                         Icons.lock_outline,
                         color: uuBlue,
                       ),
+                      controller: pass1,
                     ),
                     MyInputField(
                       keyboardtype: TextInputType.visiblePassword,
                       ispassword: isvisible,
                       label: 'Confirm Password',
+                      controller: pass2,
                       prefix: Icon(
                         Icons.lock_outline,
                         color: uuBlue,
@@ -198,9 +251,33 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20,),
-                    Roundbutton(name: 'Signup', onTap: (){}),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Roundbutton(
+                        name: 'Signup',
+                        onTap: () {
+                          print('setep 1');
+
+                          if (name.text.isNotEmpty &&
+                              studentId.text.isNotEmpty &&
+                              email.text.isNotEmpty &&
+                              paymentId.text.isNotEmpty &&
+                              selectedFloor != 'Preferred Floor' &&
+                              selectedRoomType != 'Room Type' &&
+                              pass1.text.isNotEmpty &&
+                              pass2.text.isNotEmpty) {
+                            if (pass1.text == pass2.text) {
+                              createaccount();
+                            } else {
+                              //show text message pasword are not match
+                              print('pass not matches');
+                            }
+                          }
+                        }),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -222,7 +299,9 @@ class _RegisterState extends State<Register> {
                   ],
                 ),
               ),
-              SizedBox(height: 50,)
+              SizedBox(
+                height: 50,
+              )
             ],
           ),
         ),

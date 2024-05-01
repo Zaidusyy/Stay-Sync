@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uu_hostel_management/Constants.dart';
 import 'package:uu_hostel_management/Forms/Register.dart';
@@ -16,7 +17,21 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
+
+  login(){
+    print('step 1');
+    FirebaseAuth auth=FirebaseAuth.instance;
+    auth.signInWithEmailAndPassword(email: email.text, password: pass.text).then((value) {
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>home()));
+      print('success');
+    }).onError((error, stackTrace) {
+      print(error.toString());
+    });
+  }
+
   bool isvisible=true;
+  final email = TextEditingController();
+  final pass = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +86,7 @@ class _LoginState extends State<Login> {
                     MyInputField(
                       keyboardtype: TextInputType.emailAddress,
                       label: 'Email',
+                      controller: email,
                       prefix: Icon(
                         Icons.email_outlined,
                         color: uuBlue,
@@ -80,6 +96,7 @@ class _LoginState extends State<Login> {
                       keyboardtype: TextInputType.visiblePassword,
                       ispassword: isvisible,
                       label: 'Password',
+                      controller: pass,
                       prefix: Icon(
                         Icons.lock_outline,
                         color: uuBlue,
@@ -115,7 +132,11 @@ class _LoginState extends State<Login> {
                     Roundbutton(
                       name: 'Login',
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>home()));
+                        if(email.text.isNotEmpty && pass.text.isNotEmpty){
+                          login();
+                        }
+
+
                       },
                     ),
                     SizedBox(height: 10,),

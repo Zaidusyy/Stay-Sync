@@ -13,6 +13,7 @@ class Aboutus extends StatelessWidget {
           'About Us',
           style: TextStyle(fontWeight: FontWeight.bold, color: uuBlue),
         ),
+        backgroundColor: uuWhite,
         centerTitle: true,
       ),
       drawer: MyDrawer(contxt: context,),

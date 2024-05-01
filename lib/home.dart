@@ -8,6 +8,7 @@ import 'package:uu_hostel_management/Mess/Mess.dart';
 import 'package:uu_hostel_management/Notice.dart';
 import 'package:uu_hostel_management/Forms/GatePass.dart';
 import 'package:uu_hostel_management/Slider/SliderScreen.dart';
+import 'package:uu_hostel_management/Walletui/Wallet.dart';
 
 class home extends StatelessWidget {
   const home({super.key});
@@ -39,29 +40,29 @@ class home extends StatelessWidget {
               child: Text('FEATURES',style: TextStyle(color: uuBlue,fontSize: 20,fontWeight: FontWeight.bold),),
             ),
             Row(children: [
-              Roundmenu(name: 'NOTICE', icon: Icons.note_alt_outlined, navigate:Notice()),
+              Roundmenu(name: 'Notice', icon: Icons.note_alt_outlined, navigate:Notice()),
               SizedBox(width: 10,),
-              Roundmenu(name: 'WALLET', icon: Icons.account_balance_wallet_outlined, navigate: null),
+              Roundmenu(name: 'Wallet', icon: Icons.account_balance_wallet_outlined, navigate: Wallet()),
 
             ],),
             Row(children: [
-              Roundmenu(name: 'LAUNDRY', icon: Icons.local_laundry_service_outlined, navigate: Laundry()),
+              Roundmenu(name: 'Laundry', icon: Icons.local_laundry_service_outlined, navigate: Laundry()),
               SizedBox(width: 10,),
-              Roundmenu(name: 'MESS', icon: Icons.food_bank_outlined, navigate:Mess()),
+              Roundmenu(name: 'Mess', icon: Icons.food_bank_outlined, navigate:Mess()),
             ],),
             Row(children: [
 
-              Roundmenu(name: 'GATE PASS', icon: Icons.exit_to_app_outlined, navigate: GatePass()),
+              Roundmenu(name: 'Gate Pass', icon: Icons.exit_to_app_outlined, navigate: GatePass()),
               SizedBox(width: 10,),
-              Roundmenu(name: 'BUS', icon: Icons.directions_bus_outlined, navigate: null),
+              Roundmenu(name: 'Outing', icon: Icons.directions_bus_outlined, navigate: null),
             ],),
 
             Row(children: [
-              Roundmenu(name: 'SPORTS', icon: Icons.sports_cricket_outlined, navigate:null),
+              Roundmenu(name: 'Sports', icon: Icons.sports_cricket_outlined, navigate:null),
               SizedBox(width: 10,),
-              Roundmenu(name: 'EVENTS', icon: Icons.event_note_outlined, navigate: null),
+              Roundmenu(name: 'Events', icon: Icons.event_note_outlined, navigate: null),
             ],), Row(children: [
-              Roundmenu(name: '  HELP & COMPLAINT', icon: Icons.feedback_outlined, navigate: HelpAndComplaint(),fontsize: 20,),
+              Roundmenu(name: '  HELP & COMPLAINT', icon: Icons.feedback_outlined, navigate: HelpAndComplaint(),fontsize: 18,),
 
             ],),
 

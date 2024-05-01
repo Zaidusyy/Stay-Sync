@@ -15,25 +15,25 @@ class _SliderScreenState extends State<SliderScreen> {
   List imageList = [
     {
       "id": 1,
-      "navigate": Login(),
+      "navigate": null,
       "image_path":
           'https://www.hindustantimes.com/ht-img/img/2023/04/27/1600x900/Screenshot_2023-04-27_141337_1682585196083_1682585208040.png'
     },
     {
       "id": 2,
-      "navigate": Login(),
+      "navigate": null,
       "image_path": 'https://uniteduniversity.edu.in/images/Menu_Img/About.JPG'
     },
     {
       "id": 3,
-      "navigate": Login(),
+      "navigate": null,
       "image_path": 'https://i.ytimg.com/vi/tibOZdfR_fI/maxresdefault.jpg'
     },
     {
       "id": 4,
-      "navigate": Login(),
+      "navigate": null,
       "image_path":
-          'https://www.collegebatch.com/static/clg-gallery/united-university-allahabad-188775.jpg'
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdgzAxeF-jkpyiswUQgPfY7_N49twPmYbh7ZuDm-Ec3g&s'
     },
   ];
   final CarouselController carouselController = CarouselController();
@@ -52,7 +52,8 @@ class _SliderScreenState extends State<SliderScreen> {
                   .map(
                     (item) => InkWell(
                       onTap: (){
-                        Navigator.push(context, (MaterialPageRoute(builder: (context)=>item['navigate'])));
+                        if(item['navigate']!=null){
+                        Navigator.push(context, (MaterialPageRoute(builder: (context)=>item['navigate'])));}
                       },
                       child: Container(
                         margin: const EdgeInsets.all(10),
@@ -62,6 +63,7 @@ class _SliderScreenState extends State<SliderScreen> {
                             image: DecorationImage(
                               image: NetworkImage(item['image_path']),
                               fit: BoxFit.cover,
+
                             )),
                       ),
                     ),
