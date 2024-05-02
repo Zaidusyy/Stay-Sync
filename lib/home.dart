@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uu_hostel_management/Constants.dart';
+import 'package:uu_hostel_management/Events.dart';
 import 'package:uu_hostel_management/HelpAndComplaint.dart';
 import 'package:uu_hostel_management/Laundry.dart';
 import 'package:uu_hostel_management/Mess/Mess.dart';
@@ -54,17 +55,19 @@ class home extends StatelessWidget {
 
               Roundmenu(name: 'Gate Pass', icon: Icons.exit_to_app_outlined, navigate: GatePass()),
               SizedBox(width: 10,),
-              Roundmenu(name: 'Outing', icon: Icons.directions_bus_outlined, navigate: null),
+              Roundmenu(name: 'Complaint', icon: Icons.feedback_outlined, navigate: HelpAndComplaint(),),
             ],),
 
             Row(children: [
               Roundmenu(name: 'Sports', icon: Icons.sports_cricket_outlined, navigate:null),
               SizedBox(width: 10,),
-              Roundmenu(name: 'Events', icon: Icons.event_note_outlined, navigate: null),
-            ],), Row(children: [
-              Roundmenu(name: '  HELP & COMPLAINT', icon: Icons.feedback_outlined, navigate: HelpAndComplaint(),fontsize: 18,),
-
+              Roundmenu(name: 'Events', icon: Icons.event_note_outlined, navigate: Events()),
             ],),
+            // Row(children: [
+            //   Roundmenu(name: '  HELP & COMPLAINT', icon: Icons.feedback_outlined, navigate: HelpAndComplaint(),fontsize: 18,),
+            //
+            // ],),
+            SizedBox(height: 20,),
 
           ],
         ),

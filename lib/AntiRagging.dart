@@ -17,6 +17,7 @@ class AntiRagging extends StatelessWidget {
         backgroundColor: uuWhite,
         centerTitle: true,
       ),
+      drawer: MyDrawer(contxt: context,),
       body: SingleChildScrollView(
         child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,children: [
           SizedBox(height: 10,),

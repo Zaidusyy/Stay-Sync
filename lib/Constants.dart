@@ -5,6 +5,7 @@ import 'package:uu_hostel_management/AntiRagging.dart';
 import 'package:uu_hostel_management/Forms/Login.dart';
 import 'package:uu_hostel_management/HelpAndComplaint.dart';
 import 'package:uu_hostel_management/Medicalhelp.dart';
+import 'package:uu_hostel_management/Profile.dart';
 import 'package:uu_hostel_management/home.dart';
 
 import 'Drawer_Screens/Aboutus.dart';
@@ -107,7 +108,7 @@ class MyInputField extends StatelessWidget {
           suffixIcon: suffix,
           label: Text(
             (value == null) ? label : value,
-            style: TextStyle(color: uuBlue),
+            style: TextStyle(color: uuBlue,fontWeight: (enabled)?FontWeight.normal:FontWeight.w600),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -152,16 +153,17 @@ class Drawermenue extends StatelessWidget {
               color: uuBlue, fontWeight: FontWeight.bold, fontSize: 22),
         ),
         onTap: () {
-          Navigator.of(context).pop();
+          Navigator.of(context).popUntil((route) => route.isFirst);
           print(navigate);
-          if (navigate.toString() != contxt.toString()) {
-            if (navigate.toString() == 'home') {
-              Navigator.pop(context);
-            } else {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => navigate));
-            }
-          }
+          // if (navigate.toString() != contxt.toString()) {
+          //   if (navigate.toString() == 'home') {
+          //     Navigator.pop(context);
+          //   } else {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => navigate));
+
+           // }
+          //}
         },
       ),
     );
@@ -196,7 +198,9 @@ class Roundmenu extends StatelessWidget {
             border: Border.all(color: uuLightBlue, width: 2),
           ),
           child: InkWell(
-            splashColor: Colors.transparent,
+
+            highlightColor: uuWhite.withOpacity(0),
+            splashColor: uuWhite.withOpacity(0.1),
             onTap: () {
               if (navigate != null) {
                 Navigator.push(
@@ -320,7 +324,7 @@ class MyDrawer extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Login()));
+                                      builder: (context) => Profile()));
                             },
                             child: Text(
                               'View More',

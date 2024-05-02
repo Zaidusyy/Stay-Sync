@@ -3,6 +3,7 @@ import 'package:uu_hostel_management/Forms/Login.dart';
 import 'package:uu_hostel_management/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+//import 'dart:ffi';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

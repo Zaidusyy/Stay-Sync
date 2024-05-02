@@ -17,7 +17,7 @@ class _GatePassState extends State<GatePass> {
   DateTime todate = DateTime(1111, 11, 11);
   bool chkdate = true, Generate = false;
   final reason = TextEditingController();
-  String documentid="";
+  String documentid = "";
 
   void generategatepassreq() {
     final _firebaseFirestore =
@@ -33,15 +33,16 @@ class _GatePassState extends State<GatePass> {
       'status': false,
     }).then((DocumentReference document) {
       print('Success');
-      _firebaseFirestore.doc(document.id).update({'docid': document.id}).then((value) {
-        documentid=document.id.toString();
+      _firebaseFirestore
+          .doc(document.id)
+          .update({'docid': document.id}).then((value) {
+        documentid = document.id.toString();
         Generate = true;
-        setState(() {
-
-        });
+        setState(() {});
       });
-    }).catchError((error) {
-      print(error.toString());
+    }).onError((error, stackTrace){
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(error.toString())));
     });
   }
 
@@ -107,24 +108,24 @@ class _GatePassState extends State<GatePass> {
                 height: 20,
               ),
               Container(
-                padding: (Generate && documentid!="")
+                padding: (Generate && documentid != "")
                     ? EdgeInsets.all(50)
                     : EdgeInsets.only(top: 30, bottom: 30, left: 5, right: 5),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: uuLightRed, width: 2)),
-                child: (Generate && documentid!="")
+                child: (Generate && documentid != "")
                     ? Column(
                         children: [
-                          PrettyQrView.data(
-                              data: documentid),
-                                  // ' ${reason.text.toString()} | Approved |${fromdate.toString().substring(0, 11)}| ${todate.toString().substring(0, 11)}'),
+                          PrettyQrView.data(data: documentid),
+                          // ' ${reason.text.toString()} | Approved |${fromdate.toString().substring(0, 11)}| ${todate.toString().substring(0, 11)}'),
                           SizedBox(
                             height: 30,
                           ),
-                          Text( documentid.toString(),
-                           // "Approved from ${fromdate.toString().substring(0, 11)} to ${todate.toString().substring(0, 11)}",
+                          Text(
+                            documentid.toString(),
+                            // "Approved from ${fromdate.toString().substring(0, 11)} to ${todate.toString().substring(0, 11)}",
                             style: TextStyle(color: uuBlue, fontSize: 20),
                             textAlign: TextAlign.center,
                           ),
@@ -175,7 +176,7 @@ class _GatePassState extends State<GatePass> {
                                     reason.text.isNotEmpty) {
                                   generategatepassreq();
                                 }
-                               // setState(() {});
+                                // setState(() {});
                               }),
                           SizedBox(
                             height: 10,
