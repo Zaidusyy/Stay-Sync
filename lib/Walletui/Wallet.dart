@@ -68,7 +68,7 @@ class _WalletState extends State<Wallet> {
         title: Text('Wallet',
             style: TextStyle(color: uuBlue, fontWeight: FontWeight.bold)),
         iconTheme: IconThemeData(color: uuBlue),
-        backgroundColor: uuWhite,
+        backgroundColor: uuLightBlue,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

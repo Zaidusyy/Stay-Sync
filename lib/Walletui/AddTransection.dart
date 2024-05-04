@@ -45,7 +45,7 @@ class AddTransection extends StatelessWidget {
         title: Text('Add Transection',
             style: TextStyle(color: uuBlue, fontWeight: FontWeight.bold)),
         iconTheme: IconThemeData(color: uuBlue),
-        backgroundColor: uuWhite,
+        backgroundColor: uuLightBlue,
       ),
       body: Container(
         padding: EdgeInsets.only(top: 30, left: 15, right: 15, bottom: 15),

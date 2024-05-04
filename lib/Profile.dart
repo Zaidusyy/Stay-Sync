@@ -1,8 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uu_hostel_management/Constants.dart';
+import 'package:uu_hostel_management/Forms/Login.dart';
 
 
 
@@ -71,6 +70,7 @@ class _ProfileState extends State<Profile> {
               MyInputField(prefix: Icon(Icons.home_work_outlined,color: uuBlue,),label: 'Room no : 503 , 5th floor Shifa Palace B wing Amrut Nagar Mumbra (E) Thane 400612 Maharashtra India',enabled: isedit,maxline: 2,),
               SizedBox(height: 20,),
               Roundbutton(name: 'Log Out', onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
               }),
               SizedBox(height: 50,),
 

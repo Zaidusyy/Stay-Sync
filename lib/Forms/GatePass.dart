@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:uu_hostel_management/Constants.dart';
+import 'package:uu_hostel_management/GatePassList.dart';
 
 class GatePass extends StatefulWidget {
   const GatePass({super.key});
@@ -21,7 +22,7 @@ class _GatePassState extends State<GatePass> {
 
   void generategatepassreq() {
     final _firebaseFirestore =
-        FirebaseFirestore.instance.collection('Gate Pass');
+        FirebaseFirestore.instance.collection('GatePass');
     final uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
     _firebaseFirestore.add({
@@ -66,9 +67,12 @@ class _GatePassState extends State<GatePass> {
     return Scaffold(
       backgroundColor: uuWhite,
       appBar: AppBar(
+        centerTitle: true,
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>GatePassList()));
+              },
               icon: Icon(
                 Icons.library_books_outlined,
                 color: uuBlue,
@@ -78,7 +82,7 @@ class _GatePassState extends State<GatePass> {
             width: 5,
           )
         ],
-        backgroundColor: uuWhite,
+        backgroundColor: uuLightBlue,
         title: Text(
           'Gate Pass',
           style: TextStyle(color: uuBlue, fontWeight: FontWeight.bold),

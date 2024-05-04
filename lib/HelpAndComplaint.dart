@@ -18,23 +18,28 @@ class _HelpAndComplaintState extends State<HelpAndComplaint> {
   String selectedtype='Select Type';
   final Ctext=TextEditingController();
 
+
   final _firebaseFirestore=FirebaseFirestore.instance.collection('Complaint');
   sendcomplaint(){
     print('step 1');
     FirebaseAuth auth=FirebaseAuth.instance;
     final uid=auth.currentUser!.uid.toString();
-
     if(selectedtype!='Select Type'&& Ctext.text.toString().length>15) {
+      print('step2');
       _firebaseFirestore.doc(uid).collection(selectedtype).add({
         'uid': uid,
-        'Text': Ctext.text.toString()
-
+        'Text': Ctext.text.toString(),
+        'time':DateTime.now()
       }).then((value) {
-        print('sucess');
-
+        Ctext.text='';
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('We\'ll respond soon'),backgroundColor: uuBlue,));
       }).onError((error, stackTrace) {
         print(error.toString());
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Problem connecting to server'),backgroundColor: uuRed,));
       });
+    }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill in the reason or select the type properly',),backgroundColor: uuRed,));
     }
   }
 
@@ -45,7 +50,8 @@ class _HelpAndComplaintState extends State<HelpAndComplaint> {
       appBar: AppBar(
         actions: [
           IconButton(onPressed: (){}, icon: Icon(Icons.library_books_outlined,color: uuBlue,size: 30,)),SizedBox(width: 5,)],
-        backgroundColor: uuWhite,
+        backgroundColor: uuLightBlue,
+        centerTitle: true,
         title: Text(
           'Help & Cpmplaint',
           style: TextStyle(color: uuBlue, fontWeight: FontWeight.bold),
@@ -81,7 +87,7 @@ class _HelpAndComplaintState extends State<HelpAndComplaint> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: uuLightRed, width: 2)),
-                child: Column(
+                child:Column(
                   children: [
 
                     Container(
